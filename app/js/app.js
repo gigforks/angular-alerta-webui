@@ -103,7 +103,15 @@ alertaApp.config(['$httpProvider',
         };
     });
 }]);
+function generate_state() {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+  for (var i = 0; i < 5; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
+}
 alertaApp.config(['config', '$authProvider',
   function (config, $authProvider) {
     $authProvider.loginUrl = config.endpoint+'/auth/login';
@@ -119,6 +127,18 @@ alertaApp.config(['config', '$authProvider',
       scope: ['user:email', 'read:org'],
       authorizationEndpoint: (config.github_url || 'https://github.com')+'/login/oauth/authorize'
     });
+    $authProvider.oauth2({
+      name: 'itsyouonline',
+      url: config.endpoint+'/auth/itsyouonline',
+      clientId: config.client_id,
+      requiredUrlParams: ['state', 'scope'],
+      scope: ['user:memberof:'+config.client_id],
+      state: generate_state(),
+      redirectUri: window.location.origin,
+      response_type: 'code',
+      authorizationEndpoint: (config.itsyouonline_url || 'https://itsyou.online')+'/v1/oauth/authorize'
+    });
+
     $authProvider.oauth2({
       name: 'gitlab',
       url: config.endpoint+'/auth/gitlab',

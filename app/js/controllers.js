@@ -155,7 +155,8 @@ alertaControllers.controller('AlertListController', ['$scope', '$route', '$locat
     $scope.show = [
       {name: 'Open', value: ['open', 'unknown']},
       {name: 'Active', value: ['open', 'ack', 'assign']},
-      {name: 'Closed', value: ['closed', 'expired']}
+      {name: 'Closed', value: ['closed', 'expired']},
+      {name: 'Ack', value: ['ack']}
     ];
     $scope.status = $scope.show[0];
 
@@ -459,7 +460,8 @@ alertaControllers.controller('AlertTop10Controller', ['$scope', '$location', '$t
     $scope.show = [
       {name: 'Open', value: ['open', 'unknown']},
       {name: 'Active', value: ['open', 'ack', 'assign']},
-      {name: 'Closed', value: ['closed', 'expired']}
+      {name: 'Closed', value: ['closed', 'expired']},
+      {name: 'Ack', value: ['ack']}
     ];
     $scope.status = $scope.show[0];
 
